@@ -1,0 +1,50 @@
+<section style="height: auto; background-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.87) 0%, rgba(0, 0, 0, 0.97) 100%), url('../../assets/slika1.jpeg');
+  background-repeat: no-repeat; background-size: cover;">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1 style="font-weight: bold; font-size: 40px;">Vaša korpa</h1>
+  </div>
+  <div style="color: white; padding: 53px; height: inherit;">
+    <!--Tekst koji se javlja kada u korpi nema elemenata-->
+    <h2 *ngIf="this.productService.cartList.length == 0" fxLayoutAlign="center center">Vaša korpa je
+      trenutno prazna!</h2>
+    <section fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-around center"
+      *ngFor="let product of this.productService.cartList"
+      style="border: 2px solid #e75b1e; padding: 7px; margin: 0 auto; width: 30%;">
+      <!-- Slike koje stoje uz pojedinačne proizvode i pojavljuju se u zavisnosti od tipa proizvoda i dodatnih stavki -->
+      <img *ngIf="product.productType == 'Kafa u zrnu'" src="assets/slika5(copy).png" alt="Kafa u zrnu">
+      <img *ngIf="product.productType == 'Mlečna čokolada'" src="assets/slika8.png" alt="Mlečna čokolada">
+      <img *ngIf="product.productType == 'Mlevena kafa'" src="assets/slika3.png" alt="Mlevena kafa">
+      <img *ngIf="product.productType == 'Specijalna edicija'" src="assets/slika6.png"
+        alt="Čokolada u obliku tastature">
+      <img *ngIf="product.productType == 'Bela čokolada' && !(product.name.includes('lešnik'))"
+        src="../../assets/slika9.png" alt="Bela čokolada">
+      <img *ngIf="product.productType == 'Bela čokolada' && (product.name.includes('lešnik'))"
+        src="../../assets/slika11.png" alt="Bela čokolada">
+      <img *ngIf="product.productType == 'Crna čokolada' && !(product.name.includes('70%'))"
+        src="../../assets/slika7(copy).png" alt="Crna čokolada">
+      <img *ngIf="product.productType == 'Crna čokolada' && (product.name.includes('70%'))"
+        src="../../assets/slika12.png" alt="Crna čokolada">
+      <!-- Osnovne informacije o proizvodima -->
+      <ul style="width: 40%;">
+        <li>Tip proizvoda: {{ product.productType }}</li>
+        <li>Naziv: {{ product.name }}</li>
+        <li>Količina: {{ product.quantity | number }}</li>
+        <li>Cena: {{ product.price * product.quantity | number }} din.</li>
+        <li>Vreme dostave: {{ product.deliveryTime | number }} dan(a)</li>
+      </ul>
+      <!-- Brisanje pojedinačnih jedinica proizvoda iz korpe -->
+      <a class="remove" (click)="deleteFromCart(product)">
+        <mat-icon>close</mat-icon>
+      </a>
+    </section>
+    <!-- Brisanje svih elemenata iz korpe, prikaz ukupne cene i dugme za poručivanje -->
+    <div *ngIf="!(this.productService.cartList.length == 0)">
+      <button mat-raised-button color="warn" fxLayoutAlign="end" style="margin: 0 auto; margin-top: 20px;"
+        (click)="removeAll()">Ukloni
+        sve</button>
+      <h1 fxLayoutAlign="center center">Ukupna cena: {{ this.productService.cartTotal | number }} din.</h1>
+      <button mat-raised-button color="primary" fxLayoutAlign="end" style="margin: 0 auto;"
+        (click)="onOrderConfirm(this.productService.cartList)">Poruči</button>
+    </div>
+  </div>
+</section>

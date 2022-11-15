@@ -1,0 +1,15 @@
+img {
+  width: 80px;
+}
+
+h1 {
+  margin-top: 5vh;
+}
+
+.remove {
+  color: #e75b1e;
+}
+
+.remove:hover {
+  cursor: pointer;
+}

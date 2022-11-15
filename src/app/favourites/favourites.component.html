@@ -1,0 +1,60 @@
+<section style="background-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.67) 0%, rgba(0, 0, 0, 0.87) 100%), url('../../assets/slika1.jpeg');
+background-repeat: no-repeat; background-size: cover;">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h1 style="font-weight: bold; font-size: 40px;">Lista omiljenih proizvoda</h1>
+  </div>
+  <div fxLayout=" row wrap" style="width: 100%; height: inherit; padding: 100px; color: white;">
+    <!--Tekst koji se javlja kada nema omiljenih proizvoda-->
+    <h2 fxFlex *ngIf="this.productService.favouriteList.length == 0" fxLayoutAlign="center center">Nemate nijedan
+      omiljeni
+      proizvod!</h2>
+    <section fxFlex="1 0 1" fxFlexOffset="10px" fxLayoutGap="15px" fxLayoutAlign="space-evenly center"
+      *ngFor="let product of this.productService.favouriteList"
+      style="border: 2px solid #e75b1e; background-color: rgba(66, 66, 66, 0.65); padding: 7px;">
+      <!-- Slike koje stoje uz pojedinačne proizvode i pojavljuju se u zavisnosti od tipa proizvoda i dodatnih stavki -->
+      <img *ngIf="product.productType == 'Kafa u zrnu'" src="assets/slika5(copy).png" alt="Kafa u zrnu">
+      <img *ngIf="product.productType == 'Mlečna čokolada'" src="assets/slika8.png" alt="Mlečna čokolada">
+      <img *ngIf="product.productType == 'Mlevena kafa'" src="assets/slika3.png" alt="Mlevena kafa">
+      <img *ngIf="product.productType == 'Specijalna edicija'" src="assets/slika6.png"
+        alt="Čokolada u obliku tastature">
+      <img
+        *ngIf="product.productType == 'Bela čokolada' && !(product.description.includes('lešnik') || product.name.includes('lešnik'))"
+        src="../../assets/slika9.png" alt="Bela čokolada">
+      <img
+        *ngIf="product.productType == 'Bela čokolada' && (product.description.includes('lešnik') || product.name.includes('lešnik'))"
+        src="../../assets/slika11.png" alt="Bela čokolada">
+      <img
+        *ngIf="product.productType == 'Crna čokolada' && !(product.description.includes('70%') || product.name.includes('70%'))"
+        src="../../assets/slika7(copy).png" alt="Crna čokolada">
+      <img
+        *ngIf="product.productType == 'Crna čokolada' && (product.description.includes('70%') || product.name.includes('70%'))"
+        src="../../assets/slika12.png" alt="Crna čokolada">
+      <!-- Informacije o proizvodima -->
+      <ul>
+        <li>Kategorija: {{ product.category }}</li>
+        <li>Tip proizvoda: {{ product.productType }}</li>
+        <li>Naziv: {{ product.name }}</li>
+        <li>Količina: {{ product.quantity | number }} g</li>
+        <li>Cena: {{ product.price | number }} din.</li>
+        <li>Opis: {{ product.description }}</li>
+        <li>Vreme dostave: {{ product.deliveryTime }}</li>
+        <li>Zemlja porekla: {{ product.countryOfOrigin }}</li>
+        <li>Prodavac: {{ product.retailer }}</li>
+        <li>Dostupnost: {{ product.availability }}</li>
+        <li fxLayoutAlign="center center" fxLayoutGap="5px">
+          <!-- Broj zvezdica se popunjava prema izračunatoj aritmetičkoj sredini ocena zadatih od strane korisnika-->
+          <star-rating [value]="product.rating" [totalstars]="5" checkedcolor="#e75b1e" uncheckedcolor="gray"
+            size="24px" readonly="false" (rate)="onRate($event, product)"></star-rating>
+          <p>({{ product.rating }} / 5) ({{ product.numberOfPersonsRated }})</p>
+        </li>
+        <!-- Dodavanje proizvoda u korpu -->
+        <li fxLayoutAlign="center center" fxLayoutGap="5px"><button mat-raised-button color="primary"
+            (click)="addToCart(product)" [disabled]="product.availability == 'Nije dostupno'">Dodaj u
+            korpu</button>
+          <!-- Brisanje proizvoda iz omiljenih -->
+          <button mat-raised-button color="warn" (click)="removeFromFavourites(product)">Ukloni iz omiljenih</button>
+        </li>
+      </ul>
+    </section>
+  </div>
+</section>

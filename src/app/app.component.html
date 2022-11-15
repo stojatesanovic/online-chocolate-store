@@ -1,0 +1,54 @@
+<div *ngIf="this.userService.isSignedIn">
+  <app-navbar></app-navbar>
+</div>
+<router-outlet></router-outlet>
+<div class="footer">
+  <div class="container">
+    <div class="footer-logo">
+    </div>
+    <div id="mali-futeri">
+      <div class="footer-a">
+        <h3>O nama</h3>
+        <p>Osnovani smo 2015. godine sa posebnom misijom da omogućimo našim korisnicima sladak život
+          uz proivode koje pravimo u sopstvenoj režiji.
+          Nudimo široku ponudu proizvoda od kafe i čokolade koje možete probati u toplini svoga
+          doma kao i u našim objektima.
+        </p>
+      </div>
+
+      <div class="footer-b">
+        <h3>Kontakt</h3>
+        <p>
+          <mat-icon color="primary">home</mat-icon>Petra Petrovića 27, 11000, Beograd
+        </p>
+        <p>
+          <mat-icon color="primary">phone</mat-icon>+381641112222
+        </p>
+        <p>
+          <mat-icon color="primary">email</mat-icon><a href="#">ccstore@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="footer-c">
+        <h3>Radno vreme</h3>
+
+        <ul>
+          <li>
+            <p>Ponedeljak - Petak</p>
+            <span> 10:00 - 22:00 </span>
+          </li>
+          <li>
+            <p>Vikendom </p>
+            <span> 11:00 - 19:00 </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="copyright" class="copyright-glavno">
+    <div class="container">
+      <h6 class="copy-tekst"> Sajt nije za komercijalnu upotrebu <a href="#" target="_blank"></a>
+      </h6>
+    </div>
+  </div>
+</div>

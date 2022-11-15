@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <div class="logo-navbar" fxLayoutAlign="start center">
+    <a routerLink="/" (click)="emptyCart()"><img src="../assets/logoo.png" alt="Logo kompanije" width="140px"></a>
+  </div>
+  <!-- Zaglavni meni za pristup neophodnim komponentama -->
+  <div *ngIf="this.userService.isSignedIn" fxFlex fxLayoutAlign="end center" fxLayoutGap="20px">
+    <div fxFlex fxLayoutAlign="end center" fxLayoutGap="10px">
+      <mat-icon color="primary">shopping_cart</mat-icon>
+      <a routerLink="/cart" routerLinkActive="active">Moja korpa
+      </a>
+      <a>|</a>
+      <mat-icon color="primary">local_shipping</mat-icon>
+      <a routerLink="/orders" routerLinkActive="active">Moje porudžbine
+      </a>
+      <a>|</a>
+      <mat-icon color="primary">favorite</mat-icon>
+      <a routerLink="/favourites" routerLinkActive="active">Omiljeni proizvodi
+      </a>
+    </div>
+    <!-- Ispis imena i prezimena aktivnog korisnika -->
+    <button mat-raised-button color="primary" (click)="openProfile(this.userService.currentUser.id)">
+      {{ this.userService.currentUser.name + ' ' + this.userService.currentUser.surname }}
+    </button>
+    <button mat-raised-button color="warn" (click)="signOut()">
+      Odjava
+    </button>
+  </div>
+</mat-toolbar>

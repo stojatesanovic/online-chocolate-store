@@ -1,0 +1,7 @@
+mat-toolbar {
+  background-color: rgb(43, 39, 36);
+}
+
+.active {
+  color: white;
+}
